@@ -1,0 +1,691 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Executive CFO Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-2: #0c1728;
+      --panel: rgba(255, 255, 255, 0.05);
+      --panel-strong: rgba(255, 255, 255, 0.07);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f5f7ff;
+      --muted: #9eaac2;
+      --gold: #d8b36a;
+      --gold-soft: #f4d79a;
+      --cyan: #76e4ff;
+      --violet: #8a7dff;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --max: 1220px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(118, 228, 255, 0.10), transparent 22%),
+        radial-gradient(circle at 88% 10%, rgba(216, 179, 106, 0.10), transparent 20%),
+        radial-gradient(circle at 50% 100%, rgba(138, 125, 255, 0.10), transparent 28%),
+        linear-gradient(180deg, #040b15 0%, #07111f 35%, #0b1625 100%);
+      line-height: 1.65;
+      padding: 26px;
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      padding: 34px;
+      min-height: 620px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(216,179,106,0.12), transparent 30%),
+        linear-gradient(300deg, rgba(118,228,255,0.12), transparent 30%);
+      pointer-events: none;
+    }
+
+    .hero-left,
+    .hero-right {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: var(--gold-soft);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .mini-label::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .hero h1 {
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(42px, 7vw, 84px);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.98), rgba(216,179,106,0.95), rgba(118,228,255,0.82));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero .subtitle {
+      max-width: 740px;
+      font-size: clamp(17px, 2vw, 22px);
+      color: #dce4f8;
+      margin-bottom: 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+      max-width: 760px;
+    }
+
+    .hero-stat {
+      padding: 18px 18px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .hero-stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .profile-panel {
+      height: 100%;
+      border-radius: 28px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)),
+        linear-gradient(180deg, rgba(216,179,106,0.06), transparent 45%);
+      border: 1px solid rgba(216,179,106,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-panel::after {
+      content: "";
+      position: absolute;
+      right: -50px;
+      bottom: -50px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216,179,106,0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .profile-top h3 {
+      font-family: "Manrope", sans-serif;
+      font-size: 22px;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .profile-top p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .profile-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .profile-list li {
+      list-style: none;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #e8eeff;
+      font-size: 14px;
+    }
+
+    .profile-quote {
+      margin-top: 26px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #f4f7ff;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .section {
+      margin-top: 28px;
+      padding: 30px;
+      border-radius: var(--radius-xl);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-kicker {
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .section-desc {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    .skill {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+
+    .skill::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(216,179,106,0.10), rgba(118,228,255,0.08), transparent 70%);
+      opacity: .9;
+      pointer-events: none;
+    }
+
+    .skill:hover {
+      transform: translateY(-8px);
+      border-color: rgba(216,179,106,0.35);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.28);
+    }
+
+    .skill-badge {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      margin-bottom: 18px;
+      font-size: 22px;
+      background: linear-gradient(135deg, rgba(216,179,106,0.22), rgba(118,228,255,0.18));
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .skill h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .skill p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cases {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    .case {
+      border-radius: 26px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    }
+
+    .case-top {
+      padding: 22px 22px 16px;
+      background: linear-gradient(90deg, rgba(216,179,106,0.12), rgba(118,228,255,0.04));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .case-num {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .case-top h3 {
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .case-body {
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .case-block {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border-left: 2px solid rgba(216,179,106,0.5);
+    }
+
+    .case-block strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #fff;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .case-block span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .tool {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #eef3ff;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all .25s ease;
+    }
+
+    .tool:hover {
+      transform: translateY(-2px);
+      border-color: rgba(118,228,255,0.35);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+    }
+
+    .final-block {
+      margin-top: 28px;
+      padding: 34px;
+      border-radius: 30px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)),
+        linear-gradient(90deg, rgba(216,179,106,0.08), rgba(118,228,255,0.08));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .final-block h2 {
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(28px, 4vw, 50px);
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .final-block p {
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .signature {
+      margin-top: 30px;
+      text-align: center;
+      color: #7f8ba5;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .skills {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cases {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 14px;
+      }
+
+      .hero,
+      .section,
+      .final-block {
+        padding: 22px 18px;
+        border-radius: 24px;
+      }
+
+      .hero-grid,
+      .skills {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: clamp(36px, 13vw, 58px);
+      }
+
+      .section-title,
+      .final-block h2 {
+        line-height: 1.05;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <section class="hero glass">
+      <div class="hero-left">
+        <div class="mini-label">Executive Finance Portfolio</div>
+        <h1>Финансовый директор<br>нового поколения</h1>
+        <p class="subtitle">
+          21+ год опыта в производстве и торговле. Управление прибылью, ликвидностью,
+          бюджетированием и устойчивостью бизнеса. Интеграция AI в финансовую функцию
+          для ускорения отчетности, аналитики и управленческих решений.
+        </p>
+
+        <div class="hero-grid">
+          <div class="hero-stat">
+            <strong>21+ лет</strong>
+            <span>опыта в финансах и управлении</span>
+          </div>
+          <div class="hero-stat">
+            <strong>500 млн ₽</strong>
+            <span>масштаб бизнеса по обороту</span>
+          </div>
+          <div class="hero-stat">
+            <strong>Производство</strong>
+            <span>сильная экспертиза в себестоимости и марже</span>
+          </div>
+          <div class="hero-stat">
+            <strong>AI + Finance</strong>
+            <span>современный технологический подход</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="profile-panel">
+          <div class="profile-top">
+            <h3>Позиционирование</h3>
+            <p>
+              Финансовый руководитель, который помогает собственнику видеть реальную
+              экономику бизнеса, управлять cash flow и усиливать функцию финансов за счет AI.
+            </p>
+
+            <ul class="profile-list">
+              <li>CFO / Head of Finance / Финансовый директор</li>
+              <li>Производственные и торговые компании</li>
+              <li>Управленческий учет, бюджетирование, treasury</li>
+              <li>Автоматизация, BI, AI-аналитика, прогнозирование</li>
+            </ul>
+          </div>
+
+          <div class="profile-quote">
+            «Не просто контролировать цифры, а превращать финансы в инструмент роста бизнеса».
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section glass">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Core Expertise</div>
+          <h2 class="section-title">Ключевые компетенции</h2>
+        </div>
+        <p class="section-desc">
+          Сильные стороны, которые формируют премиальный профиль современного CFO на рынке.
+        </p>
+      </div>
+
+      <div class="skills">
+        <article class="skill">
+          <div class="skill-badge">₽</div>
+          <h3>Управление прибылью</h3>
+          <p>Рост маржинальности, контроль себестоимости, факторный анализ и повышение эффективности финансовой модели бизнеса.</p>
+        </article>
+
+        <article class="skill">
+          <div class="skill-badge">📈</div>
+          <h3>Cash Flow и ликвидность</h3>
+          <p>Платежный календарь, дебиторская задолженность, управление оборотным капиталом и снижение кассовых разрывов.</p>
+        </article>
+
+        <article class="skill">
+          <div class="skill-badge">⚙️</div>
+          <h3>Автоматизация финансов</h3>
+          <p>Сокращение ручного труда, ускорение отчетности, повышение прозрачности данных и качества управленческой аналитики.</p>
+        </article>
+
+        <article class="skill">
+          <div class="skill-badge">🤖</div>
+          <h3>AI в финансовой функции</h3>
+          <p>Использование AI для сценарного анализа, прогнозирования, выявления отклонений и подготовки управленческих выводов.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section glass">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Selected Cases</div>
+          <h2 class="section-title">Кейсы и примеры задач</h2>
+        </div>
+        <p class="section-desc">
+          Выделенные блоки с понятной структурой: проблема, решение, результат.
+        </p>
+      </div>
+
+      <div class="cases">
+        <article class="case">
+          <div class="case-top">
+            <div class="case-num">Case 01</div>
+            <h3>Производство: рост себестоимости и давление на маржу</h3>
+          </div>
+          <div class="case-body">
+            <div class="case-block">
+              <strong>Проблема</strong>
+              <span>Рост затрат и снижение прозрачности экономики производства.</span>
+            </div>
+            <div class="case-block">
+              <strong>Решение</strong>
+              <span>План-факт анализ, контроль закупок, ABC-анализ продукции и усиление управленческого контроля.</span>
+            </div>
+            <div class="case-block">
+              <strong>Результат</strong>
+              <span>Рост прозрачности себестоимости, улучшение управляемости маржи и качества решений.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-top">
+            <div class="case-num">Case 02</div>
+            <h3>Торговля: дебиторка и кассовые разрывы</h3>
+          </div>
+          <div class="case-body">
+            <div class="case-block">
+              <strong>Проблема</strong>
+              <span>Нестабильный денежный поток и высокая нагрузка на оборотный капитал.</span>
+            </div>
+            <div class="case-block">
+              <strong>Решение</strong>
+              <span>Платежный календарь, лимиты клиентов, контроль инкассации и дисциплина взыскания.</span>
+            </div>
+            <div class="case-block">
+              <strong>Результат</strong>
+              <span>Стабилизация ликвидности и усиление контроля над дебиторской задолженностью.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-top">
+            <div class="case-num">Case 03</div>
+            <h3>AI и цифровизация финансовой функции</h3>
+          </div>
+          <div class="case-body">
+            <div class="case-block">
+              <strong>Проблема</strong>
+              <span>Ручная подготовка отчетности и длительный цикл аналитики для руководства.</span>
+            </div>
+            <div class="case-block">
+              <strong>Решение</strong>
+              <span>Интеграция AI-инструментов в аналитику, отчетность, прогнозирование и сценарное моделирование.</span>
+            </div>
+            <div class="case-block">
+              <strong>Результат</strong>
+              <span>Ускорение подготовки отчетов и повышение качества управленческих выводов.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section glass">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Tools Stack</div>
+          <h2 class="section-title">Инструменты и технологии</h2>
+        </div>
+        <p class="section-desc">
+          Сетка инструментов в виде тегов — для современного и визуально чистого представления.
+        </p>
+      </div>
+
+      <div class="tools">
+        <span class="tool">ChatGPT</span>
+        <span class="tool">Copilot</span>
+        <span class="tool">Excel</span>
+        <span class="tool">Power Query</span>
+        <span class="tool">Power BI</span>
+        <span class="tool">1C</span>
+        <span class="tool">ERP</span>
+        <span class="tool">BI-аналитика</span>
+        <span class="tool">Управленческая отчетность</span>
+        <span class="tool">Финансовое моделирование</span>
+        <span class="tool">План-факт анализ</span>
+        <span class="tool">Сценарный анализ</span>
+        <span class="tool">Прогнозирование</span>
+        <span class="tool">AI dashboards</span>
+        <span class="tool">Автоматизация отчетности</span>
+      </div>
+    </section>
+
+    <section class="final-block">
+      <h2>Финансовый директор,<br>который усиливает бизнес цифрами и технологиями</h2>
+      <p>
+        Премиальное позиционирование для рынка 2026: классическая CFO-экспертиза,
+        сильная управленческая база и практическое применение AI для повышения скорости,
+        прозрачности и качества финансовых решений.
+      </p>
+    </section>
+
+    <div class="signature">
+      Версия 2 — executive / premium style landing page
+    </div>
+
+  </main>
+</body>
+</html>
